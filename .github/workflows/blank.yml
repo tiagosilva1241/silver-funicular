@@ -34,3 +34,14 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+linkchecker:
+  stage: test
+  image:
+    name: ghcr.io/tcort/markdown-link-check:3.11.2
+    entrypoint: ["/bin/sh", "-c"]
+  script:
+    - markdown-link-check ./docs
+  rules:
+    - changes:
+      - "**/*.md"
